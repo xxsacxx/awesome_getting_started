@@ -1,0 +1,13 @@
+Avro vs Flatbuffers :
+
+Benchmarking data : https://google.github.io/flatbuffers/flatbuffers_benchmarks.html (proto vs flatbuf)
+					https://labs.criteo.com/2017/05/serialization/ (avro vs proto)
+
+Use cases:
+1- Avro should not be used if your objects are small. But it looks interesting for its speed if you have very big objects 
+2- Avro should be used when you don’t have complex data structures as they are difficult to express. 
+3- Avro tools also look more targeted at the Java world than cross-language development.
+4- The Avro encoding doesn’t have an indicator to say which field is next; it just encodes one field after another, in the order they appear in the schema. Since there is no way for the parser to know that a field has been skipped, there is no such thing as an optional field in Avro. Instead, if you want to be able to leave out a value, you can use a union type, like union { null, long } above. This is encoded as a byte to tell the parser which of the possible union types to use, followed by the value itself. By making a union with the null type (which is simply encoded as zero bytes) you can make a field optional.
+5- In flatbuffers There is no difference in the encoding between optional, required and repeated fields (except for the number of times the tag number can appear). This means that you can change a field from optional to repeated and vice versa (if the parser is expecting an optional field but sees the same tag number multiple times in one record, it discards all but the last value). required has an additional validation check, so if you change it, you risk runtime errors .
+6- In flatbuffers you can rename fields, because field names don’t exist in the binary serialization, but you can never change a tag number.
+7- In Avro,Because fields are matched by name, changing the name of a field is tricky. You need to first update all readers of the data to use the new field name, while keeping the old name as an alias (since the name matching uses aliases from the reader’s schema). Then you can update the writer’s schema to use the new field name.
