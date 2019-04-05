@@ -1,0 +1,22 @@
+table ReposList {
+    repos : [message];
+}
+
+table message {
+    id : long;
+    name : string;
+    mesage : string;
+    usr : User;
+    senderid : string;
+    
+}
+
+table User {
+    first_name : string;
+    last_name : string;
+    type : string;
+    gravatar_id : string;
+    gender : string;
+}
+
+root_type ReposList;

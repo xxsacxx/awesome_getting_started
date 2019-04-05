@@ -1,0 +1,7 @@
+$ cmake -G "Unix Makefiles"
+$ cmake -G "Visual Studio 10"
+$ cmake -G "Xcode"
+$ make
+$./flatc -p -b flatmess.fbs flatmess.json
+$./flatc --raw-binary -t flatmess.fbs -- flatmess.bin
+
