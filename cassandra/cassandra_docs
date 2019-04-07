@@ -1,0 +1,26 @@
+cassandra installation : http://cassandra.apache.org/doc/latest/getting_started/installing.html
+Querying cassandra : http://cassandra.apache.org/doc/latest/getting_started/querying.html
+
+Data modelling :
+Data modeling in Cassandra uses a query-driven approach, in which specific queries are the key to organizing the data
+in simple words we have to create tables in such a way that the query we are interested in gets processed quickly and efficiently
+Cassandra's database design is based on the requirement for fast reads and writes, so the better the schema design, the faster data is written and retrieved.
+
+Comparing with traditional approach :
+In contrast, relational databases normalize data based on the tables and relationships designed, and then writes the queries that will be made. Data modeling in relational databases is table-driven, and any relationships between tables are expressed as table joins in queries.
+
+Main point :
+the first component of a table's primary key is the partition key; within a partition, rows are clustered by the remaining columns of the key.
+Other columns can be indexed separately from the primary key. Because Cassandra is a distributed database, efficiency is gained for reads and
+writes when data is grouped together on nodes by partition. The fewer partitions that must be queried to get an answer to a question, the faster
+the response.
+
+In simple words :
+As cassandra is distributed db it stores partitions on different nodes , this partition is decided by partition key which is the first part of
+primary key , the query processing will be faster if we query less number of partition. So partition key should be decided strategically
+Remaining cols in primary key uniquely identifies a row in the partition
+We normally cannot query on columns which are not part of primary key , but we can create index for them separately.Though it wont be very efficient.
+It is better to create table wrt your query. As storing data is cheaper in cassandra.
+
+Data modelling : https://docs.datastax.com/en/cql/3.3/cql/ddl/dataModelingApproach.html
+efficient data modelling practise : https://docs.datastax.com/en/cql/3.3/cql/ddl/dataModelingAnalysis.html
