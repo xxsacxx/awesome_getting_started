@@ -12,6 +12,8 @@ class message(object):
         n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
         x = message()
         x.Init(buf, n + offset)
+        #print(x)
+        #print(n)
         return x
 
     # message
@@ -35,8 +37,10 @@ class message(object):
     # message
     def Mesage(self):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(8))
+        print(o)
         if o != 0:
             return self._tab.String(o + self._tab.Pos)
+
         return None
 
     # message

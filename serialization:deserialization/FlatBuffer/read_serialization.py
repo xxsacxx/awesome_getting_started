@@ -7,16 +7,17 @@ sys.path.insert(0, '/Users/onion8/learning/serialization:deserialization/FlatBuf
 import message
 
 
-with open("/Users/onion8/learning/serialization:deserialization/FlatBuffer/flatmain.bin", "rb") as f:
-    buff = f.read()
+with open("/Users/onion8/learning/serialization:deserialization/FlatBuffer/abc.bin", "rb") as f:
+    buff = bytearray(f.read())
+    #print(buff)
+#print(buff)
+monster = message.message.GetRootAsmessage(buff, 0)
 
-monster = message.message.GetRootAsmessage(buff, 1)
-
-sender = monster.Name();
+#sender = monster.Id();
 msg = monster.Mesage();
 
-print(monster)
-print(sender)
+#print(monster)
+#print(sender)
 print(msg)
 
 
